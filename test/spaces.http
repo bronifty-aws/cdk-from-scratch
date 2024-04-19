@@ -1,5 +1,4 @@
-@url = https://sfy8fgcqg2.execute-api.us-east-1.amazonaws.com/prod/
-
+@url = https://4s5l5x0kj5.execute-api.us-east-1.amazonaws.com/prod/
 
 GET {{url}}/spaces
 # Authorization: {{token}}

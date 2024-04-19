@@ -1,12 +1,8 @@
+import * as cdk from "aws-cdk-lib";
+import * as path from "path";
 import { Stack, StackProps } from "aws-cdk-lib";
-import {
-  Code,
-  Function as LambdaFunction,
-  Runtime,
-} from "aws-cdk-lib/aws-lambda";
 import { LambdaIntegration } from "aws-cdk-lib/aws-apigateway";
 import { Construct } from "constructs";
-import { join } from "path";
 
 export class LambdaStack extends Stack {
   public readonly helloLambdaIntegration: LambdaIntegration;
@@ -14,11 +10,15 @@ export class LambdaStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const helloLambda = new LambdaFunction(this, "HelloLambda", {
-      runtime: Runtime.NODEJS_18_X,
-      handler: "hello.main",
-      code: Code.fromAsset(join(__dirname, "..", "..", "services")),
-    });
+    const helloLambda = new cdk.aws_lambda_nodejs.NodejsFunction(
+      this,
+      "LambdaFunction",
+      {
+        runtime: cdk.aws_lambda.Runtime.NODEJS_LATEST,
+        handler: "handler",
+        entry: path.join(__dirname, "../../services/hello2.js"),
+      }
+    );
     this.helloLambdaIntegration = new LambdaIntegration(helloLambda);
   }
 }
