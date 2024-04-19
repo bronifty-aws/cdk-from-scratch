@@ -14,7 +14,7 @@ export class LambdaStack extends cdk.Stack {
       {
         runtime: cdk.aws_lambda.Runtime.NODEJS_LATEST,
         handler: "handler",
-        entry: path.join(__dirname, "../../services/hello2.js"),
+        entry: path.join(__dirname, "../../services/temp/hello2.js"),
       }
     );
     this.helloLambdaIntegration = new cdk.aws_apigateway.LambdaIntegration(
