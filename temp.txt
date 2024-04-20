@@ -5,3 +5,4 @@ HttpApiIntegrationApi	AWS::ApiGatewayV2::Integration
 HttpApiRouteDefault	AWS::ApiGatewayV2::Route	
 
 HttpApiStage AWS::ApiGatewayV2::Stage	
+
