@@ -1,4 +1,4 @@
-@url = https://7svpf5fvbc.execute-api.us-east-1.amazonaws.com/
+@url = https://lqvmiwhgx4.execute-api.us-east-1.amazonaws.com/
 
 GET {{url}}/dog
 # Authorization: {{token}}

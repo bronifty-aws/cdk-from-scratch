@@ -3,8 +3,7 @@ import * as path from "path";
 import { Construct } from "constructs";
 
 export class LambdaStack extends cdk.Stack {
-  // public readonly helloLambdaIntegration: cdk.aws_apigatewayv2.HttpRouteIntegration;
-  public readonly helloLambdaFunction: cdk.aws_lambda_nodejs.NodejsFunction;
+  public readonly helloLambdaIntegration: cdk.aws_apigatewayv2.HttpRouteIntegration;
 
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
@@ -23,6 +22,10 @@ export class LambdaStack extends cdk.Stack {
     //     "helloLambdaIntegration",
     //     helloLambda
     //   );
-    this.helloLambdaFunction = helloLambda;
+    this.helloLambdaIntegration =
+      new cdk.aws_apigatewayv2_integrations.HttpLambdaIntegration(
+        "HelloLambdaIntegration",
+        helloLambda
+      );
   }
 }
