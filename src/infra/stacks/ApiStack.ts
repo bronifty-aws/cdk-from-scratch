@@ -17,12 +17,6 @@ export class ApiStack extends cdk.Stack {
     // });
     // spacesResource.addMethod("GET", props.helloLambdaIntegration);
 
-    // const httpLambdaIntegration =
-    //   new cdk.aws_apigatewayv2_integrations.HttpLambdaIntegration(
-    //     "HelloLambdaIntegration",
-    //     props.helloLambdaFunction
-    //   );
-
     const httpApi = new cdk.aws_apigatewayv2.HttpApi(this, "SpacesApi", {
       apiName: "SpacesApi",
       createDefaultStage: true,
