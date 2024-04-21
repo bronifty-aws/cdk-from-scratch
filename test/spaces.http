@@ -1,6 +1,6 @@
-@url = https://n9hofgz6dc.execute-api.us-east-1.amazonaws.com/prod/
+@url = https://7svpf5fvbc.execute-api.us-east-1.amazonaws.com/
 
-GET {{url}}/spaces
+GET {{url}}/dog
 # Authorization: {{token}}
 ###
 

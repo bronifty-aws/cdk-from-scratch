@@ -1,0 +1,40 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "SpacesApi",
+    "version" : "2024-04-21 03:11:15UTC"
+  },
+  "servers" : [ {
+    "url" : "https://7svpf5fvbc.execute-api.us-east-1.amazonaws.com/{basePath}",
+    "variables" : {
+      "basePath" : {
+        "default" : ""
+      }
+    }
+  } ],
+  "tags" : [ {
+    "name" : "aws:cloudformation:stack-id",
+    "x-amazon-apigateway-tag-value" : "arn:aws:cloudformation:us-east-1:851725517932:stack/ApiStack/c67a6b40-ff8c-11ee-bb8a-126a971edc61"
+  }, {
+    "name" : "aws:cloudformation:stack-name",
+    "x-amazon-apigateway-tag-value" : "ApiStack"
+  }, {
+    "name" : "aws:cloudformation:logical-id",
+    "x-amazon-apigateway-tag-value" : "SpacesApiECBF71CD"
+  } ],
+  "paths" : {
+    "/$default" : {
+      "x-amazon-apigateway-any-method" : {
+        "isDefaultRoute" : true,
+        "x-amazon-apigateway-integration" : {
+          "payloadFormatVersion" : "2.0",
+          "type" : "aws_proxy",
+          "httpMethod" : "POST",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:851725517932:function:LambdaStack-LambdaFunctionBF21E41F-IkXj3vD2Cext/invocations",
+          "connectionType" : "INTERNET"
+        }
+      }
+    }
+  },
+  "x-amazon-apigateway-importexport-version" : "1.0"
+}
