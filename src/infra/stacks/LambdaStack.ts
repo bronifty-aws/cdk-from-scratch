@@ -33,26 +33,28 @@ export class LambdaStack extends cdk.Stack {
         helloLambda
       );
 
-    // helloLambda.addToRolePolicy(
-    //   new cdk.aws_iam.PolicyStatement({
-    //     effect: cdk.aws_iam.Effect.ALLOW,
-    //     resources: [props.spacesTable.tableArn],
-    //     actions: [
-    //       "dynamodb:PutItem",
-    //       "dynamodb:Scan",
-    //       "dynamodb:GetItem",
-    //       "dynamodb:UpdateItem",
-    //       "dynamodb:DeleteItem",
-    //     ],
-    //   })
-    // );
-
     helloLambda.addToRolePolicy(
       new cdk.aws_iam.PolicyStatement({
         effect: cdk.aws_iam.Effect.ALLOW,
-        resources: ["*"],
-        actions: ["*"],
+        resources: [props.spacesTable.tableArn],
+        actions: [
+          "dynamodb:PutItem",
+          "dynamodb:Scan",
+          "dynamodb:GetItem",
+          "dynamodb:UpdateItem",
+          "dynamodb:DeleteItem",
+        ],
       })
     );
+
+    props.deploymentBucket.grantReadWrite(helloLambda);
+
+    // helloLambda.addToRolePolicy(
+    //   new cdk.aws_iam.PolicyStatement({
+    //     effect: cdk.aws_iam.Effect.ALLOW,
+    //     resources: ["*"],
+    //     actions: ["*"],
+    //   })
+    // );
   }
 }

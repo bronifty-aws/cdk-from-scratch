@@ -22,9 +22,7 @@ app.get("/dog", (req, res, next) => {
 });
 
 app.get("/cat", (req, res) =>
-  res.send(
-    `<div style='background-image: url(${BUCKET_URL}/dist/client/tom.jpg); background-repeat: no-repeat; background-size: cover; background-position: center; height: 100%; width: 100%;'><h1 align=center>Hello, I am sleepy Tom</h1></div>`
-  )
+  res.send(`<img src="${BUCKET_URL}/dist/client/tom.jpg" alt="Tom">`)
 );
 app.get("/html", (req, res) => res.sendFile(`${BUCKET_URL}/index.html`));
 

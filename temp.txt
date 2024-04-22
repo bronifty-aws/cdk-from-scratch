@@ -1,8 +1,14 @@
-HttpApi	AWS::ApiGatewayV2::Api	
 
-HttpApiIntegrationApi	AWS::ApiGatewayV2::Integration	
 
-HttpApiRouteDefault	AWS::ApiGatewayV2::Route	
+// forbidden
+// http://space-finder-frontend-1244da2cccb3.s3-website-us-east-1.amazonaws.com/
+// works
+https://space-finder-frontend-1244da2cccb3.s3.amazonaws.com/index.html
 
-HttpApiStage AWS::ApiGatewayV2::Stage	
 
+not working
+https://space-finder-frontend-1244da2cccb3.s3-website-us-east-1.amazonaws.com/dist/client/tom.jpg
+
+
+working
+https://space-finder-frontend-1244da2cccb3.s3.amazonaws.com/dist/client/tom.jpg
