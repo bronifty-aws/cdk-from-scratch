@@ -17,29 +17,36 @@ export class DataStack2 extends Stack {
     this.deploymentBucket = new Bucket(this, "SpaceFinderFrontend", {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
-      bucketName: `space-finder-frontend-${suffix}`,
-      publicReadAccess: true,
-      websiteIndexDocument: "index.html",
+      bucketName: `space-finder-photos-${suffix}`,
+      cors: [
+        {
+          allowedMethods: [
+            cdk.aws_s3.HttpMethods.HEAD,
+            cdk.aws_s3.HttpMethods.GET,
+            cdk.aws_s3.HttpMethods.PUT,
+          ],
+          allowedOrigins: ["*"],
+          allowedHeaders: ["*"],
+        },
+      ],
+      // accessControl: BucketAccessControl.PUBLIC_READ, // currently not working,
+      objectOwnership: cdk.aws_s3.ObjectOwnership.OBJECT_WRITER,
       blockPublicAccess: {
-        blockPublicAcls: true,
+        blockPublicAcls: false,
         blockPublicPolicy: false,
-        ignorePublicAcls: true,
+        ignorePublicAcls: false,
         restrictPublicBuckets: false,
       },
+      //   bucketName: `space-finder-frontend-${suffix}`,
+      //   publicReadAccess: true,
+      //   websiteIndexDocument: "index.html",
+      //   blockPublicAccess: {
+      //     blockPublicAcls: true,
+      //     blockPublicPolicy: false,
+      //     ignorePublicAcls: true,
+      //     restrictPublicBuckets: false,
+      //   },
     });
-
-    // const bucket = new aws_s3.Bucket(this, "testBucket", {
-    //     blockPublicAccess: {
-    //       blockPublicAcls: true,
-    //       blockPublicPolicy: true,
-    //       ignorePublicAcls: true,
-    //       restrictPublicBuckets: true,
-    //     },
-    //     enforceSSL: true,
-    //     publicReadAccess: false,
-    //     encryption: aws_s3.BucketEncryption.S3_MANAGED,
-    //     versioned: true,
-    //   });
 
     this.spacesTable = new Table(this, "SpacesTable", {
       partitionKey: {
