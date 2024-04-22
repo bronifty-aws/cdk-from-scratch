@@ -8,13 +8,11 @@ import { DataStack2 } from "./stacks/DataStack2";
 
 const app = new App();
 const dataStack = new DataStack2(app, "DataStack");
+const uiDeploymentStack = new UiDeploymentStack(app, "UiDeploymentStack");
 const lambdaStack = new LambdaStack(app, "LambdaStack", {
   spacesTable: dataStack.spacesTable,
-  deploymentBucket: dataStack.deploymentBucket,
+  distribution: uiDeploymentStack.distribution,
 });
 new ApiStack(app, "ApiStack", {
   helloLambdaIntegration: lambdaStack.helloLambdaIntegration,
-});
-new UiDeploymentStack(app, "UiDeploymentStack", {
-  deploymentBucket: dataStack.deploymentBucket,
 });

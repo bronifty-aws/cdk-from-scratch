@@ -4,7 +4,7 @@ import { Construct } from "constructs";
 
 interface LambdaStackProps extends cdk.StackProps {
   spacesTable: cdk.aws_dynamodb.ITable;
-  deploymentBucket: cdk.aws_s3.IBucket;
+  distribution: cdk.aws_cloudfront.IDistribution;
 }
 
 export class LambdaStack extends cdk.Stack {
@@ -21,7 +21,7 @@ export class LambdaStack extends cdk.Stack {
         handler: "handler",
         entry: path.join(__dirname, "../../services/testing123/index.js"),
         environment: {
-          BUCKET_URL: props.deploymentBucket.bucketWebsiteUrl,
+          BUCKET_URL: props.distribution.distributionDomainName,
           TABLE_NAME: props.spacesTable.tableName,
         },
       }
@@ -47,7 +47,7 @@ export class LambdaStack extends cdk.Stack {
       })
     );
 
-    props.deploymentBucket.grantReadWrite(helloLambda);
+    // props.distribution.grantReadWrite(helloLambda);
 
     // helloLambda.addToRolePolicy(
     //   new cdk.aws_iam.PolicyStatement({
