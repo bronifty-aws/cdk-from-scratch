@@ -11,14 +11,14 @@ export class BucketStack extends cdk.Stack {
       publicReadAccess: true,
     });
 
-    new cdk.aws_s3_deployment.BucketDeployment(this, "DeployWebsite", {
-      sources: [
-        cdk.aws_s3_deployment.Source.asset(
-          "./src/services/testing123/dist/client"
-        ),
-      ],
-      destinationBucket: websiteBucket,
-    });
+    // new cdk.aws_s3_deployment.BucketDeployment(this, "DeployWebsite", {
+    //   sources: [
+    //     cdk.aws_s3_deployment.Source.asset(
+    //       "./src/services/testing123/dist/client"
+    //     ),
+    //   ],
+    //   destinationBucket: websiteBucket,
+    // });
 
     this.helloBucket = websiteBucket;
   }
