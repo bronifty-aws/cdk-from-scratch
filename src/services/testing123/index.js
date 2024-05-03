@@ -22,15 +22,11 @@ app.get("/dog", (req, res, next) => {
 });
 
 app.get("/cat", (req, res) =>
-  res.send(`<img src="${BUCKET_URL}/dist/client/tom.jpg" alt="Tom">`)
+  res.send(`<img src="https://${BUCKET_URL}/dist/client/tom.jpg" alt="Tom">`)
 );
 
-// app.get("/html", (req, res) => {
-//   res.sendFile("index.html", { root: BUCKET_URL });
-// });
-
 app.get("/html", (req, res) => {
-  res.redirect(`${BUCKET_URL}/index.html`);
+  res.sendFile("index.html", { root: BUCKET_URL });
 });
 
 app.use((req, res, next) => {
