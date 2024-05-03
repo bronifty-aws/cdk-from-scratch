@@ -22,5 +22,12 @@ export class ApiStack extends cdk.Stack {
       createDefaultStage: true,
       defaultIntegration: props.helloLambdaIntegration,
     });
+
+    new cdk.CfnOutput(this, "httpApi.defaultStage?.domainUrl", {
+      value: httpApi.apiEndpoint,
+    });
+    // new CfnOutput(this, "SpaceFInderUrl", {
+    //   value: backendCloudfront.distributionDomainName,
+    // });
   }
 }

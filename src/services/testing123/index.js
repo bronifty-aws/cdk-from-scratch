@@ -24,7 +24,14 @@ app.get("/dog", (req, res, next) => {
 app.get("/cat", (req, res) =>
   res.send(`<img src="${BUCKET_URL}/dist/client/tom.jpg" alt="Tom">`)
 );
-app.get("/html", (req, res) => res.sendFile(`${BUCKET_URL}/index.html`));
+
+// app.get("/html", (req, res) => {
+//   res.sendFile("index.html", { root: BUCKET_URL });
+// });
+
+app.get("/html", (req, res) => {
+  res.redirect(`${BUCKET_URL}/index.html`);
+});
 
 app.use((req, res, next) => {
   return res.status(404).json({

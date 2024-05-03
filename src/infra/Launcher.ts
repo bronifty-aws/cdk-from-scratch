@@ -7,12 +7,12 @@ import { UiDeploymentStack } from "./stacks/UiDeploymentStack";
 import { DataStack2 } from "./stacks/DataStack2";
 
 const app = new App();
-const dataStack = new DataStack2(app, "DataStack");
-const uiDeploymentStack = new UiDeploymentStack(app, "UiDeploymentStack");
-const lambdaStack = new LambdaStack(app, "LambdaStack", {
+const dataStack = new DataStack2(app, "DataStackViteSSR");
+const uiDeploymentStack = new UiDeploymentStack(app, "UiDeploymentStackViteSSR");
+const lambdaStack = new LambdaStack(app, "LambdaStackViteSSR", {
   spacesTable: dataStack.spacesTable,
   distribution: uiDeploymentStack.distribution,
 });
-new ApiStack(app, "ApiStack", {
+new ApiStack(app, "ApiStackViteSSR", {
   helloLambdaIntegration: lambdaStack.helloLambdaIntegration,
 });

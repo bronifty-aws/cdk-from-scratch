@@ -49,12 +49,12 @@ export class LambdaStack extends cdk.Stack {
 
     // props.distribution.grantReadWrite(helloLambda);
 
-    // helloLambda.addToRolePolicy(
-    //   new cdk.aws_iam.PolicyStatement({
-    //     effect: cdk.aws_iam.Effect.ALLOW,
-    //     resources: ["*"],
-    //     actions: ["*"],
-    //   })
-    // );
+    helloLambda.addToRolePolicy(
+      new cdk.aws_iam.PolicyStatement({
+        effect: cdk.aws_iam.Effect.ALLOW,
+        resources: ["*"],
+        actions: ["*"],
+      })
+    );
   }
 }
