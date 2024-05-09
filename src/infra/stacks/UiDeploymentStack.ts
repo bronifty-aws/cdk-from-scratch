@@ -10,73 +10,18 @@ import * as path from "path";
 import * as fs from "fs";
 import { getSuffixFromStack } from "../Utils";
 
+interface UiDeploymentStackProps extends StackProps {
+  assetsPath: string;
+}
+
 export class UiDeploymentStack extends Stack {
   public readonly distribution!: cdk.aws_cloudfront.IDistribution;
 
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props: UiDeploymentStackProps) {
     super(scope, id, props);
 
-    // const uiDir = join(__dirname, "..", "..", "services", "testing123");
-
-    // const suffix = getSuffixFromStack(this);
-
-    // const deploymentBucket = new cdk.aws_s3.Bucket(this, "uiDeploymentBucket", {
-    //   bucketName: `space-finder-frontend-${suffix}`,
-    //   removalPolicy: cdk.RemovalPolicy.DESTROY,
-    //   autoDeleteObjects: true,
-    //   publicReadAccess: true,
-    //   websiteIndexDocument: "index.html",
-    //   blockPublicAccess: {
-    //     blockPublicAcls: false,
-    //     blockPublicPolicy: false,
-    //     ignorePublicAcls: false,
-    //     restrictPublicBuckets: false,
-    //   },
-    //   objectOwnership: cdk.aws_s3.ObjectOwnership.OBJECT_WRITER,
-    //   enforceSSL: true,
-    //   cors: [
-    //     {
-    //       allowedMethods: [
-    //         cdk.aws_s3.HttpMethods.HEAD,
-    //         cdk.aws_s3.HttpMethods.GET,
-    //         cdk.aws_s3.HttpMethods.POST,
-    //         cdk.aws_s3.HttpMethods.PUT,
-    //         cdk.aws_s3.HttpMethods.DELETE,
-    //       ],
-    //       allowedOrigins: ["*"],
-    //       allowedHeaders: ["*"],
-    //     },
-    //   ],
-    // });
-
-    // if (!existsSync(uiDir)) {
-    //   console.warn("Ui dir not found: " + uiDir);
-    //   return;
-    // }
-
-    // new BucketDeployment(this, "SpacesFinderDeployment", {
-    //   destinationBucket: deploymentBucket,
-    //   sources: [Source.asset(uiDir)],
-    // });
-
-    // const originIdentity = new OriginAccessIdentity(
-    //   this,
-    //   "OriginAccessIdentity"
-    // );
-    // deploymentBucket.grantRead(originIdentity);
-
-    // const distribution = new Distribution(this, "SpacesFinderDistribution", {
-    //   defaultRootObject: "index.html",
-    //   defaultBehavior: {
-    //     origin: new S3Origin(deploymentBucket, {
-    //       originAccessIdentity: originIdentity,
-    //     }),
-    //   },
-    // });
-
     const suffix = getSuffixFromStack(this);
-    // const uiDir = path.join(__dirname, "..", "dist");
-    const uiDir = path.join(__dirname, "..", "..", "services", "testing123");
+    const uiDir = path.join(__dirname, props.assetsPath);
 
     const s3CorsRule: cdk.aws_s3.CorsRule = {
       allowedMethods: [cdk.aws_s3.HttpMethods.GET, cdk.aws_s3.HttpMethods.HEAD],

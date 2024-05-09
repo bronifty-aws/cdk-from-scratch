@@ -5,6 +5,7 @@ import { Construct } from "constructs";
 interface LambdaStackProps extends cdk.StackProps {
   spacesTable: cdk.aws_dynamodb.ITable;
   distribution: cdk.aws_cloudfront.IDistribution;
+  assetsPath: string;
 }
 
 export class LambdaStack extends cdk.Stack {
@@ -19,9 +20,9 @@ export class LambdaStack extends cdk.Stack {
       {
         runtime: cdk.aws_lambda.Runtime.NODEJS_LATEST,
         handler: "handler",
-        entry: path.join(__dirname, "../../services/testing123/index.js"),
+        entry: path.join(__dirname, `${props.assetsPath}/index.js`),
         environment: {
-          BUCKET_URL: props.distribution.distributionDomainName,
+          BUCKET_URL: `https://${props.distribution.distributionDomainName}`,
           TABLE_NAME: props.spacesTable.tableName,
         },
       }
@@ -33,19 +34,19 @@ export class LambdaStack extends cdk.Stack {
         helloLambda
       );
 
-    helloLambda.addToRolePolicy(
-      new cdk.aws_iam.PolicyStatement({
-        effect: cdk.aws_iam.Effect.ALLOW,
-        resources: [props.spacesTable.tableArn],
-        actions: [
-          "dynamodb:PutItem",
-          "dynamodb:Scan",
-          "dynamodb:GetItem",
-          "dynamodb:UpdateItem",
-          "dynamodb:DeleteItem",
-        ],
-      })
-    );
+    // helloLambda.addToRolePolicy(
+    //   new cdk.aws_iam.PolicyStatement({
+    //     effect: cdk.aws_iam.Effect.ALLOW,
+    //     resources: [props.spacesTable.tableArn],
+    //     actions: [
+    //       "dynamodb:PutItem",
+    //       "dynamodb:Scan",
+    //       "dynamodb:GetItem",
+    //       "dynamodb:UpdateItem",
+    //       "dynamodb:DeleteItem",
+    //     ],
+    //   })
+    // );
 
     // props.distribution.grantReadWrite(helloLambda);
 
